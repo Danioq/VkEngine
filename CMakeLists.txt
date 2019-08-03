@@ -33,8 +33,8 @@ set(
 	"${CMAKE_CXX_FLAGS_RELEASE} -Wall"
 )
 
-# Set C++11
-set (CMAKE_CXX_STANDARD 11)
+# Set C++17
+set (CMAKE_CXX_STANDARD 17)
 
 # Setup binary output
 add_executable(${BIN_NAME} ${SOURCES})
