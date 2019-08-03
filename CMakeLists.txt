@@ -3,20 +3,12 @@
 
 cmake_minimum_required(VERSION 3.1)
 
-<<<<<<< HEAD
-project(VKDemo)
-=======
 project(VkEngine)
->>>>>>> Project name fix
 
 # Set the name of the ouput binary
 set(
 	BIN_NAME
-<<<<<<< HEAD
-	"vkdemo"
-=======
 	"VkEngine"
->>>>>>> Project name fix
 )
 
 # Add all files from a src folder
