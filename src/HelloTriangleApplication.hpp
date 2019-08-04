@@ -112,7 +112,9 @@ private:
     void cleanup();
     void createInstance();
 
-    void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+    void fillAppInfo(VkApplicationInfo&);
+
+    void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT&);
     void createSurface();
     void pickPhysicalDevice();
     void createLogicalDevice();
@@ -125,14 +127,14 @@ private:
     void createCommandBuffers();
     void createSyncObjects();
     void drawFrame();
-    VkShaderModule createShaderModule(const std::vector<char>& code);
-    VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
-    VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
-    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
-    SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
-    bool isDeviceSuitable(VkPhysicalDevice device);
-    bool checkDeviceExtensionSupport(VkPhysicalDevice device);
-    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+    VkShaderModule createShaderModule(const std::vector<char>&);
+    VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>&);
+    VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>&);
+    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR&);
+    SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice);
+    bool isDeviceSuitable(VkPhysicalDevice);
+    bool checkDeviceExtensionSupport(VkPhysicalDevice);
+    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice);
     std::vector<const char*> getRequiredExtensions();
 
     static std::vector<char> readFile(const std::string& filename)

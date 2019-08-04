@@ -81,16 +81,21 @@ void HelloTriangleApplication::cleanup()
     glfwTerminate();
 }
 
-void HelloTriangleApplication::createInstance()
-{
 
-    VkApplicationInfo appInfo = {};
+void HelloTriangleApplication::fillAppInfo(VkApplicationInfo& appInfo)
+{
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     appInfo.pApplicationName = "Hello Triangle";
     appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
     appInfo.pEngineName = "No Engine";
     appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
     appInfo.apiVersion = VK_API_VERSION_1_0;
+}
+
+void HelloTriangleApplication::createInstance()
+{
+    VkApplicationInfo appInfo = {};
+    fillAppInfo(appInfo);
 
     VkInstanceCreateInfo createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -526,11 +531,8 @@ void HelloTriangleApplication::createCommandBuffers()
         renderPassInfo.pClearValues = &clearColor;
 
         vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-
         vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
-
         vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
-
         vkCmdEndRenderPass(commandBuffers[i]);
 
         if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS)
