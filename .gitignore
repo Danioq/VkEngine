@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+*.spv
 
 cmake_install.cmake
 Makefile
