@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <optional>
 #include <set>
+#include <glm/glm.hpp>
+#include <array>
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -105,6 +107,48 @@ private:
     std::vector<VkFence> inFlightFences;
     size_t currentFrame = 0;
 
+    VkBuffer vertexBuffer;
+    VkDeviceMemory vertexBufferMemory;
+
+    typedef struct Vertex
+    {
+        glm::vec2 pos;
+        glm::vec3 color;
+
+        static VkVertexInputBindingDescription getBindingDestription()
+        {
+            VkVertexInputBindingDescription bindingDestription = {};
+            bindingDestription.binding =0;
+            bindingDestription.stride = sizeof(Vertex);
+            bindingDestription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+
+            return bindingDestription;
+        }
+
+        static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions()
+        {
+            std::array<VkVertexInputAttributeDescription, 2> attributeDesctription = {};
+            attributeDesctription[0].binding = 0;
+            attributeDesctription[0].location = 0;
+            attributeDesctription[0].format = VK_FORMAT_R32G32_SFLOAT;
+            attributeDesctription[0].offset = offsetof(Vertex, pos);
+
+            attributeDesctription[1].binding = 0;
+            attributeDesctription[1].location = 1;
+            attributeDesctription[1].format = VK_FORMAT_R32G32B32_SFLOAT;
+            attributeDesctription[1].offset = offsetof(Vertex, color);
+
+            return attributeDesctription;
+        }
+    } Vertex;
+
+    std::vector<Vertex> vertices = 
+    {
+        {{0.0f, -0.5f}, {1.0f, 1.0f, 1.0f}},
+        {{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
+        {{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
+    };
+
     void initWindow();
     void initVulkan();
 
@@ -127,6 +171,8 @@ private:
     void createCommandBuffers();
     void createSyncObjects();
     void drawFrame();
+    void createVertexBuffer();
+    uint32_t findMemoryType(uint16_t, VkMemoryPropertyFlags);
     VkShaderModule createShaderModule(const std::vector<char>&);
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>&);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>&);
