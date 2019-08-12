@@ -82,10 +82,10 @@ public:
 	void initVulkan(VkInstance*, VkSurfaceKHR*);
 	void drawFrame();
 	void shutdown();
-	void createCommandBuffers(VkBuffer, std::vector<Vertex>);
+	void createCommandBuffers();
 	VkDevice getDevice();
 	uint32_t findMemoryType(uint16_t, VkMemoryPropertyFlags);
-
+	void render(VkBuffer, std::vector<Vulkan::Vertex>);
 private:
 	VkInstance *instance;
 	VkSurfaceKHR *surface;

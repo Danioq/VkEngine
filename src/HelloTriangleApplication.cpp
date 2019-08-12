@@ -58,9 +58,9 @@ void HelloTriangleApplication::createVertexBuffer()
     vkUnmapMemory(device, vertexBufferMemory);
 }
 
-void HelloTriangleApplication::createCommandBuffers()
+void HelloTriangleApplication::render()
 {
-	vulkan->createCommandBuffers(vertexBuffer, vertices);
+	vulkan->render(vertexBuffer, vertices);
 	return;
 }
 
@@ -69,9 +69,9 @@ void HelloTriangleApplication::updateColor(glm::vec3 v1, glm::vec3 v2, glm::vec3
 	void* data;
 	unsigned long long size = sizeof(vertices[0]) * vertices.size();
 	VkDevice device = vulkan->getDevice();
-	vertices =	{{{  0.0f, -0.5f}, v1},
-				{ {  0.5f,  0.5f}, v2},
-				{ { -0.5f,  0.5f}, v3}};
+	vertices[0].color = v1;
+	vertices[1].color = v2;
+	vertices[2].color = v3;
 	
 	vkMapMemory(device, vertexBufferMemory, 0, size, 0, &data);
 	memcpy(data, vertices.data(), (size_t(size)));

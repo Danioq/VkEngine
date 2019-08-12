@@ -8,7 +8,7 @@ public:
 	HelloTriangleApplication();
 	void initilaze(Vulkan&);
     void cleanup();
-	void createCommandBuffers();
+	void render();
 	void updateColor(glm::vec3, glm::vec3, glm::vec3);
 private:
     VkBuffer vertexBuffer;

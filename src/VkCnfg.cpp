@@ -18,6 +18,7 @@ void Vulkan::initVulkan(VkInstance *instance, VkSurfaceKHR *surface)
 	createGraphicsPipeline();
 	createFramebuffers();
 	createCommandPool();
+	createCommandBuffers();
 	createSyncObjects();
 }
 
@@ -422,7 +423,7 @@ void Vulkan::createSyncObjects()
 	}
 }
 
-void Vulkan::createCommandBuffers(VkBuffer vertexBuffer, std::vector<Vulkan::Vertex> vertices)
+void Vulkan::createCommandBuffers()
 {
 	commandBuffers.resize(swapChainFramebuffers.size());
 
@@ -436,7 +437,10 @@ void Vulkan::createCommandBuffers(VkBuffer vertexBuffer, std::vector<Vulkan::Ver
 	{
 		throw std::runtime_error("failed to allocate command buffers!");
 	}
+}
 
+void Vulkan::render(VkBuffer vertexBuffer, std::vector<Vulkan::Vertex> vertices)
+{
 	for (size_t i = 0; i < commandBuffers.size(); i++)
 	{
 		VkCommandBufferBeginInfo beginInfo = {};
@@ -473,7 +477,6 @@ void Vulkan::createCommandBuffers(VkBuffer vertexBuffer, std::vector<Vulkan::Ver
 		}
 	}
 }
-
 
 void Vulkan::drawFrame()
 {

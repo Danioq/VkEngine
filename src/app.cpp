@@ -37,7 +37,7 @@ void App::mainLoop()
 	{
 		glfwWaitEvents();
 		processColor();
-		helloTriangle.createCommandBuffers();
+		helloTriangle.render();
 		vulkan.drawFrame();
 	}
 
