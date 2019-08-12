@@ -1,8 +1,8 @@
-#include "HelloTriangleApplication.hpp"
+#include "app.hpp"
 
 int main()
 {
-    HelloTriangleApplication app;
+    App app;
 
     try
     {
